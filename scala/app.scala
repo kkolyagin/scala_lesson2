@@ -12,17 +12,29 @@ object app {
     println(Str.replace("!","")+ " and goodbye python!")
 
     //3b
-    val sumTotal: Double = 880
-    println("Значение годового дохода: " + sumTotal)
+    val sumTotal: Double= 880
+    println("\nЗначение годового дохода: " + sumTotal)
     val sumAward: Double = 56 //% это госслужба до 2023, далее оклады увеличат в 3 раза процент снизят, сумма не изменится.
     println("размер премии в процентах от годового дохода: " + sumAward + " %")
     val sumFoodAllowance: Double = 26.4 //все постоянные ежемесячные доплаты
     println("компенсация питания: " + sumFoodAllowance)
-    val oklad = (sumTotal * (1 - sumAward / 100) / 12 - sumFoodAllowance) * 0.87
-    printf("Оклад за вычетом ПДН = %.2f", oklad)
+    var oklad = (sumTotal * (1 - sumAward / 100) / 12 - sumFoodAllowance) * 0.87
+    oklad="%.3f".format(oklad).replace(",",".").toDouble
+    println(s"Оклад за вычетом ПДН = $oklad")
 
     //3c
-    
+    val Employees = scala.collection.mutable.Map[Char,Double]('a' -> 100.0, 'b' -> 150.0, 'c' -> 200.0, 'd' -> 80.0, 'e' -> 120.0, 'f' -> 75.0)
+    Employees+=('g'->oklad)
+
+    var sum: Double = 0
+    for ((key, value) <- Employees) sum += value
+    var mid: Double = sum / Employees.size
+    println(f"\nОтклонение от среднего значение оклада $mid%.2f:")
+    for ((key, value) <- Employees) {
+      val otkl = (value - mid) / mid * 100
+      println(f"$key : $otkl%.2f %% \t($value)")
+    }
+
 
 
   }

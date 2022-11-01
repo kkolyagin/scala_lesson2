@@ -3,7 +3,8 @@ object app {
     //3a
     var Str="Hello, Scala!"
     //выводит фразу «Hello, Scala!» справа налево
-    println(Str.foldLeft(List[Char]()){(x,y)=>y::x}.mkString(""))
+    //println(Str.foldLeft(List[Char]()){(x,y)=>y::x}.mkString(""))
+    println(Str.reverse)
     //переводит всю фразу в нижний регистр
     println(Str.toLowerCase)
     // удаляет символ!
@@ -23,7 +24,7 @@ object app {
     println(s"Оклад за вычетом ПДН = $oklad")
 
     //3c
-    val Employees = scala.collection.mutable.Map[Char,Double]('a' -> 100.0, 'b' -> 150.0, 'c' -> 200.0, 'd' -> 80.0, 'e' -> 120.0, 'f' -> 75.0)
+    var Employees = scala.collection.mutable.Map[Char,Double]('a' -> 100.0, 'b' -> 150.0, 'c' -> 200.0, 'd' -> 80.0, 'e' -> 120.0, 'f' -> 75.0)
     Employees+=('g'->oklad)
 
     var sum: Double = 0
@@ -35,7 +36,15 @@ object app {
       println(f"$key : $otkl%.2f %% \t($value)")
     }
 
+    //3d
+    Employees('g')-=Employees('g')-mid //уравниваю зарплату сотрудника к средней
+    println(s"Самая высокая зарплата =  ${Employees.values.max}")
+    println(s"Самая низкая зарплата =  ${Employees.values.min}")
 
-
+    //3e
+    Employees+=('h'-> 350)
+    Employees+=('i'-> 90)
+    var Employees1=Employees.toSeq.sortBy(_._2)
+    for (i <- Employees1.iterator) println(i)
   }
 }
